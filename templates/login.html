@@ -6,14 +6,24 @@
 
     <form method="post">
         <input name="uid" placeholder="User ID" required>
-        <input name="pwd" placeholder="Password" required>
+        <input name="pwd" type="password" placeholder="Password" required>
 
         <button class="button" type="submit">Login</button>
     </form>
 
     {% if error %}
-        <p style="color:#fca5a5;">{{ error }}</p>
+        <p style="color:#fca5a5; margin-top:10px;">{{ error }}</p>
     {% endif %}
+
+    <hr style="margin:16px 0; border-color:#1e293b;">
+
+    <p style="font-size:14px; color:#94a3b8; text-align:center;">
+        Don’t have an account?
+    </p>
+
+    <a class="button" href="/signup" style="margin-top:8px; display:block; text-align:center;">
+        Create New Account
+    </a>
 </div>
 
 {% endblock %}

@@ -348,7 +348,13 @@ def dashboard():
         return redirect("/login")
 
     session["wallet"] = user.get("wallet", 0)
-    return render_template("dashboard.html")
+    
+    return render_template(
+        "dashboard.html",
+        uid=uid,
+        pwd=user.get("password"),   # or "pwd" key if that's what you stored
+        wallet=user.get("wallet", 0)
+    )
 
 
 @app.route("/services")

@@ -1,4 +1,6 @@
-Flask
+flask
 requests
+aiohttp
 segno
+python-dotenv
 gunicorn

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h1>Admin Dashboard</h1>
+</div>
+
+<div class="card">
+    <h2>Users</h2>
+    <table>
+        <tr>
+            <th>User ID</th>
+            <th>Wallet</th>
+            <th>Created</th>
+        </tr>
+        {% for uid, u in users.items() %}
+        <tr>
+            <td>{{ uid }}</td>
+            <td>₹{{ u.wallet }}</td>
+            <td>{{ u.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="card">
+    <h2>Recharges</h2>
+    <table>
+        <tr>
+            <th>Order</th>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Status</th>
+        </tr>
+        {% for oid, r in recharges.items() %}
+        <tr>
+            <td>{{ oid }}</td>
+            <td>{{ r.user }}</td>
+            <td>₹{{ r.amount }}</td>
+            <td>{{ r.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

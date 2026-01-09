@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="page-title">Choose a Service</h2>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+    <input id="search" placeholder="Search service…" onkeyup="applyFilters()">
+</div>
+
+<!-- CATEGORY TABS -->
+<div class="tabs">
+    <button class="tab active" onclick="filterCategory('all', this)">All</button>
+    <button class="tab" onclick="filterCategory('social', this)">Social</button>
+    <button class="tab" onclick="filterCategory('dev', this)">Developer</button>
+    <button class="tab" onclick="filterCategory('ecom', this)">E-Commerce</button>
+</div>
+
+<!-- SERVICES GRID -->
+<div class="services-grid">
+
+{% for k, s in services.items() %}
+<div class="card service-card"
+     data-name="{{ s.name|lower }}"
+     data-price="{{ s.price }}"
+     data-category="{{ s.category }}">
+
+    <div class="service-info">
+        <h3>{{ s.name }}</h3>
+        <div class="price">₹{{ s.price }}</div>
+    </div>
+
+    <form method="POST" action="/temp">
+        <input type="hidden" name="service" value="{{ k }}">
+        <button type="submit" class="button buy-btn">
+            Buy
+        </button>
+    </form>
+
+</div>
+{% endfor %}
+
+</div>
+
+
+<!-- JS -->
+<script>
+let currentCategory = "all";
+
+function applyFilters() {
+    const q = document.getElementById("search").value.toLowerCase();
+    document.querySelectorAll(".service-card").forEach(card => {
+        const matchSearch = card.dataset.name.includes(q);
+        const matchCat = currentCategory === "all" || card.dataset.category === currentCategory;
+        card.style.display = matchSearch && matchCat ? "flex" : "none";
+    });
+}
+
+function filterCategory(cat, el) {
+    currentCategory = cat;
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    el.classList.add("active");
+    applyFilters();
+}
+
+function toggleCheap(enabled) {
+    const grid = document.getElementById("servicesGrid");
+    const cards = Array.from(grid.children);
+    cards.sort((a, b) =>
+        enabled
+            ? a.dataset.price - b.dataset.price
+            : b.dataset.price - a.dataset.price
+    );
+    cards.forEach(c => grid.appendChild(c));
+}
+
+/* RECENT SERVICES (localStorage) */
+function saveRecent(code) {
+    let r = JSON.parse(localStorage.getItem("recent") || "[]");
+    r = [code, ...r.filter(x => x !== code)].slice(0, 5);
+    localStorage.setItem("recent", JSON.stringify(r));
+}
+
+function loadRecent() {
+    const r = JSON.parse(localStorage.getItem("recent") || "[]");
+    if (!r.length) return;
+
+    const map = {};
+    document.querySelectorAll(".service-card").forEach(c => {
+        map[c.dataset.code] = c.cloneNode(true);
+    });
+
+    const grid = document.getElementById("recentGrid");
+    r.forEach(code => map[code] && grid.appendChild(map[code]));
+
+    document.getElementById("recentWrap").style.display = "block";
+}
+
+loadRecent();
+</script>
+
+{% endblock %}

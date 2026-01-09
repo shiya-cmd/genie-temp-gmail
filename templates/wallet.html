@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="page-title">💼 Wallet</h2>
+
+<div class="card">
+  <h3>Balance</h3>
+  <p style="font-size:24px; font-weight:700;">
+    ₹{{ balance }}
+  </p>
+</div>
+
+<h3>Transaction History</h3>
+
+{% if history %}
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Amount</th>
+    <th>Order</th>
+    <th>Date</th>
+  </tr>
+
+  {% for h in history %}
+  <tr>
+    <td>
+      {% if h.type == "RECHARGE" %}➕ Recharge{% endif %}
+      {% if h.type == "DEDUCT" %}➖ Used{% endif %}
+      {% if h.type == "REFUND" %}💸 Refund{% endif %}
+    </td>
+    <td>₹{{ h.amount }}</td>
+    <td>{{ h.order_id }}</td>
+    <td>{{ h.time | int | datetimeformat }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No wallet activity yet.</p>
+{% endif %}
+
+
+{% endblock %}

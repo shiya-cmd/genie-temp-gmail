@@ -1,0 +1,29 @@
+{
+  "users": {
+    "USRN4U8XZ": {
+      "password": "kyZwR7Ol",
+      "wallet": 1,
+      "created_at": 1767882336
+    }
+  },
+  "recharges": {
+    "RCGI75R76UU52": {
+      "user": "USRYPXKK4",
+      "amount": 1,
+      "status": "PENDING",
+      "time": 1767880069
+    },
+    "RCG116K8X9APL": {
+      "user": "USRYPXKK4",
+      "amount": 1,
+      "status": "FAILED",
+      "time": 1767880168
+    },
+    "RCGWFUN62LV6H": {
+      "user": "USRN4U8XZ",
+      "amount": 1,
+      "status": "SUCCESS",
+      "time": 1767882426
+    }
+  }
+}

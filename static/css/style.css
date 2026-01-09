@@ -1,0 +1,236 @@
+/* GLOBAL FIX */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #020617;
+    color: #e5e7eb;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont;
+}
+
+.container {
+    max-width: 420px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* CARD */
+.card {
+    border: 1px solid #1e293b;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    background: #020617;
+}
+
+/* BUTTONS */
+.button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: #2563eb;
+    padding: 12px 16px;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+}
+
+.button.secondary {
+    background: #1e293b;
+}
+
+.button.disabled {
+    background: #334155;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* INPUT */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #1e293b;
+    background: #020617;
+    color: #e5e7eb;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th, td {
+    border: 1px solid #1e293b;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background: #020617;
+}
+
+/* PAGE TITLE */
+.page-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* FILTER BAR */
+.filter-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.filter-bar input {
+    flex: 1;
+    min-width: 160px;
+}
+
+/* TABS */
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.tab {
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid #1e293b;
+    background: #020617;
+    color: #cbd5f5;
+    cursor: pointer;
+}
+
+.tab.active {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* SERVICES GRID (ONLY FLEX — no grid conflict) */
+.services-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+/* SERVICE CARD */
+.service-card {
+    flex: 1 1 calc(50% - 14px);
+    min-width: 160px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* SERVICE INFO */
+.service-card h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.service-card .price {
+    font-size: 15px;
+    font-weight: 600;
+    color: #22c55e;
+}
+
+/* BUY BUTTON */
+.buy-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* MOBILE FIX */
+@media (max-width: 640px) {
+    .container {
+        padding: 16px;
+    }
+
+    .service-card {
+        flex: 1 1 100%;
+    }
+
+    .button {
+        font-size: 15px;
+        padding: 14px;
+    }
+}
+.dash-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* GRID */
+.dash-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+}
+
+/* CARD */
+.dash-card {
+    background: #020617;
+    border: 1px solid #1e293b;
+    border-radius: 14px;
+    padding: 18px;
+    text-decoration: none;
+    color: #e5e7eb;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dash-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+/* ICON */
+.dash-card .icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+/* TEXT */
+.dash-card h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+}
+
+.dash-card p {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+/* VARIANTS */
+.dash-card.primary {
+    border-color: #2563eb;
+}
+
+.dash-card.danger {
+    border-color: #7f1d1d;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+    .dash-title {
+        font-size: 22px;
+    }
+}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h2>Scan & Pay</h2>
+    <p><strong>Amount:</strong> ₹{{ amount }}</p>
+
+    <img
+        src="/{{ qr }}"
+        style="max-width:260px;border-radius:12px"
+    >
+
+    <p><strong>Order ID:</strong> {{ order_id }}</p>
+    <p style="color:#fca5a5;">
+        ⚠️ Do not close this page. Payment is verified automatically.
+    </p>
+
+    <div id="status" style="margin-top:10px;">
+        ⏳ Waiting for payment…
+    </div>
+</div>
+
+<script>
+setInterval(() => {
+    fetch("/api/recharge/status/{{ order_id }}")
+        .then(r => r.json())
+        .then(d => {
+            if (d.status === "success") {
+                document.getElementById("status").innerText =
+                    "✅ Payment successful! Wallet credited.";
+                setTimeout(() => {
+                    location.href = "/dashboard";
+                }, 2000);
+            }
+        })
+}, 5000)
+</script>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h2>Recharge Wallet</h2>
+    <p>Scan & Pay using UPI</p>
+
+    <img src="/{{ qr }}" style="max-width:280px;border-radius:12px">
+
+    <p><strong>Order ID:</strong> {{ order_id }}</p>
+    <p>⚠️ Do not close this page</p>
+</div>
+
+{% endblock %}

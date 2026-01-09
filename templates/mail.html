@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h2>Your Temporary Email</h2>
+    <p style="font-size:18px;">{{ mail }}</p>
+</div>
+
+<div class="card">
+    <h2>OTP Status</h2>
+    <div id="otp">Waiting for OTP…</div>
+</div>
+
+<script>
+setInterval(() => {
+    fetch("/api/mail/{{ mail_id }}")
+        .then(r => r.json())
+        .then(d => {
+            if (d.code) {
+                document.getElementById("otp").innerText = "OTP: " + d.code
+            }
+        })
+}, 5000)
+</script>
+
+{% endblock %}

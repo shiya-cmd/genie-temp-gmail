@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h2>Account Created</h2>
+    <p><strong>User ID:</strong> {{ user_id }}</p>
+    <p><strong>Password:</strong> {{ password }}</p>
+    <p class="warn">Save these credentials!</p>
+</div>
+
+<a class="button" href="/dashboard">Go to Dashboard</a>
+
+{% endblock %}

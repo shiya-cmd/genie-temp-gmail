@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="page-title">📩 Waiting for OTP</h2>
+
+<div class="card">
+    <h3>Your Email</h3>
+    <p style="font-size:18px; font-weight:600;">{{ mail }}</p>
+</div>
+
+<div class="card">
+    <h3>Status</h3>
+    <p id="timer" class="timer">⏳ 05:00</p>
+    <p id="otp-text">Waiting for OTP…</p>
+
+    <div id="success" style="display:none;">
+        <h3>🎉 OTP Received</h3>
+        <p id="otp-code" style="font-size:20px; font-weight:700;"></p>
+    </div>
+</div>
+
+<p class="hint">
+⚠️ Do not refresh or close this page. OTP will be fetched automatically.
+</p>
+
+<script>
+const expiresAt = {{ expires_at }};
+let timerInterval = null;
+let otpInterval = null;
+
+function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+
+/* 🕒 Smooth countdown (1s) */
+function startTimer() {
+    timerInterval = setInterval(() => {
+        const now = Math.floor(Date.now() / 1000);
+        const remaining = expiresAt - now;
+
+        if (remaining <= 0) {
+            document.getElementById("timer").innerText = "⏱ Time expired";
+            clearInterval(timerInterval);
+            clearInterval(otpInterval);
+            return;
+        }
+
+        document.getElementById("timer").innerText =
+            "⏳ " + formatTime(remaining);
+    }, 1000);
+}
+
+/* 🔄 OTP polling (5s) */
+function startOtpPolling() {
+    otpInterval = setInterval(() => {
+        fetch("/api/otp/{{ order_id }}")
+            .then(r => r.json())
+            .then(d => {
+                if (d.otp) {
+                    clearInterval(timerInterval);
+                    clearInterval(otpInterval);
+
+                    document.getElementById("otp-text").style.display = "none";
+                    document.getElementById("success").style.display = "block";
+                    document.getElementById("otp-code").innerText = "OTP: " + d.otp;
+                }
+            });
+    }, 5000);
+}
+
+startTimer();
+startOtpPolling();
+</script>
+
+<style>
+.timer {
+    font-size: 22px;
+    font-weight: 700;
+    color: #22c55e;
+}
+
+.hint {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 12px;
+}
+</style>
+
+{% endblock %}

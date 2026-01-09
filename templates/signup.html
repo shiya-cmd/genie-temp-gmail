@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h2>Account Created 🎉</h2>
+
+    <p><strong>User ID</strong></p>
+    <div class="card">{{ uid }}</div>
+
+    <p><strong>Password</strong></p>
+    <div class="card">{{ pwd }}</div>
+
+    <p style="color:#fca5a5;">
+        ⚠️ Save these details. They will not be shown again.
+    </p>
+
+    <a class="button" href="/dashboard">Go to Dashboard</a>
+</div>
+
+{% endblock %}

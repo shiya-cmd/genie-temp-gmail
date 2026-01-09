@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="dash-title">Dashboard</h1>
+
+<div class="dash-grid">
+
+    <a href="/services" class="dash-card primary">
+        <div class="icon">📧</div>
+        <h3>Temp Mail</h3>
+        <p>Buy temporary email with OTP</p>
+    </a>
+
+    <a href="/wallet" class="dash-card">
+        <div class="icon">💼</div>
+        <h3>Wallet</h3>
+        <p>Balance & transactions</p>
+    </a>
+
+    <a href="/recharge" class="dash-card">
+        <div class="icon">💳</div>
+        <h3>Recharge</h3>
+        <p>Add money instantly</p>
+    </a>
+
+    <a href="/logout" class="dash-card danger">
+        <div class="icon">🚪</div>
+        <h3>Logout</h3>
+        <p>End session</p>
+    </a>
+
+</div>
+
+{% endblock %}

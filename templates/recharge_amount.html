@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h2>Recharge Wallet</h2>
+
+    <form method="post" action="/recharge/create">
+        <input
+            type="number"
+            name="amount"
+            placeholder="Enter amount (₹)"
+            min="10"
+            required
+        >
+        <button class="button" type="submit">Continue</button>
+    </form>
+
+    <p style="margin-top:10px; font-size:13px;">
+        Minimum recharge ₹10
+    </p>
+</div>
+
+{% endblock %}
